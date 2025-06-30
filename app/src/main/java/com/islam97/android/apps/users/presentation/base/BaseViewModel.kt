@@ -11,6 +11,9 @@ abstract class BaseViewModel<S, I, NI : I> : ViewModel() {
     protected val mutableNavigationActionsFlow: MutableSharedFlow<NI> = MutableSharedFlow()
     val navigationActionsFlow: SharedFlow<NI> get() = mutableNavigationActionsFlow
 
+    protected val mutableMessagesFlow: MutableSharedFlow<String> = MutableSharedFlow()
+    val messagesFlow: SharedFlow<String> get() = mutableMessagesFlow
+
     protected abstract val mutableState: MutableStateFlow<S>
     val state: StateFlow<S> get() = mutableState
 

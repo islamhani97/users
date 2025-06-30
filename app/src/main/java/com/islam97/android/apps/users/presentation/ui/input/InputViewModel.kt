@@ -21,7 +21,6 @@ class InputViewModel
     override fun executeIntent(intent: InputIntent) {
         viewModelScope.launch {
             when (intent) {
-
                 is InputIntent.SetName -> {
                     mutableState.value = mutableState.value.copy(name = intent.name)
                 }
@@ -39,7 +38,7 @@ class InputViewModel
                 }
 
                 is InputIntent.AddUser -> {
-                    if (isDataValid) {
+                    if (isDataValid()) {
                         mutableState.value = mutableState.value.copy(isLoading = true)
                         addUser(
                             User(
@@ -63,42 +62,40 @@ class InputViewModel
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = addUserUseCase.invoke(user)) {
                 is Result.Success<*> -> {
-                    mutableState.value = InputState(message = "User Added Successfully")
+                    mutableState.value = InputState()
+                    mutableMessagesFlow.emit("User Added Successfully")
                 }
 
                 is Result.Error -> {
-                    mutableState.value = mutableState.value.copy(
-                        isLoading = false,
-                        message = result.errorMessage ?: "",
-                    )
+                    mutableState.value = mutableState.value.copy(isLoading = false)
+                    mutableMessagesFlow.emit(result.errorMessage ?: "")
                 }
             }
         }
     }
 
-    private val isDataValid: Boolean
-        get() {
-            if (mutableState.value.name.isBlank()) {
-                mutableState.value = mutableState.value.copy(message = "Name is Required")
-                return false
-            }
-
-            if (mutableState.value.age < 1) {
-                mutableState.value = mutableState.value.copy(message = "Age is Required")
-                return false
-            }
-
-            if (mutableState.value.jobTitle.isBlank()) {
-                mutableState.value = mutableState.value.copy(message = "Job Title is Required")
-                return false
-            }
-
-            if (mutableState.value.gender == null) {
-                mutableState.value = mutableState.value.copy(message = "Select Gender")
-                return false
-            }
-            return true
+    private suspend fun isDataValid(): Boolean {
+        if (mutableState.value.name.isBlank()) {
+            mutableMessagesFlow.emit("Name is Required")
+            return false
         }
+
+        if (mutableState.value.age < 1) {
+            mutableMessagesFlow.emit("Age is Required")
+            return false
+        }
+
+        if (mutableState.value.jobTitle.isBlank()) {
+            mutableMessagesFlow.emit("Job Title is Required")
+            return false
+        }
+
+        if (mutableState.value.gender == null) {
+            mutableMessagesFlow.emit("Select Gender")
+            return false
+        }
+        return true
+    }
 }
 
 data class InputState(
@@ -107,7 +104,6 @@ data class InputState(
     val age: Int = 0,
     val jobTitle: String = "",
     val gender: Gender? = null,
-    val message: String? = null
 )
 
 sealed class InputIntent {
