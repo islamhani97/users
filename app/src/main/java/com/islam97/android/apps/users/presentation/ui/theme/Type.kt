@@ -1,4 +1,4 @@
-package com.islam97.android.apps.users.presentation.theme.ui
+package com.islam97.android.apps.users.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
