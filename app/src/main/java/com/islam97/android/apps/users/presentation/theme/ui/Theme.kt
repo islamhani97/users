@@ -1,6 +1,5 @@
-package com.islam97.android.apps.users.ui.theme
+package com.islam97.android.apps.users.presentation.theme.ui
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

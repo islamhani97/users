@@ -1,4 +1,4 @@
-package com.islam97.android.apps.users
+package com.islam97.android.apps.users.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.islam97.android.apps.users.ui.theme.UsersTheme
+import com.islam97.android.apps.users.presentation.theme.ui.UsersTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
