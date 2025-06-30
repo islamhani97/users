@@ -3,8 +3,8 @@ package com.islam97.android.apps.users.data.room
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.islam97.android.apps.users.domain.models.Gender
 import com.islam97.android.apps.users.domain.models.User
-import com.islam97.android.apps.users.presentation.utils.Gender
 
 @Entity
 data class UserEntity(

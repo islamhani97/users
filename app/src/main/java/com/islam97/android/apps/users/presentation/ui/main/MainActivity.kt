@@ -18,7 +18,9 @@ import com.islam97.android.apps.users.presentation.ui.input.RouteInputScreen
 import com.islam97.android.apps.users.presentation.ui.theme.UsersTheme
 import com.islam97.android.apps.users.presentation.ui.users.RouteUsersScreen
 import com.islam97.android.apps.users.presentation.ui.users.UsersScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

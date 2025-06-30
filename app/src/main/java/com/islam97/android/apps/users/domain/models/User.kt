@@ -1,9 +1,7 @@
 package com.islam97.android.apps.users.domain.models
 
-import com.islam97.android.apps.users.presentation.utils.Gender
-
 data class User(
-    val id: Long,
+    val id: Long = 0L,
     val name: String,
     val age: Int,
     val jogTitle: String,
